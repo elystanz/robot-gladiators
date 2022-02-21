@@ -2,15 +2,19 @@ var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 var playerMoney = 10;
-
-// You can also log multiple values at ones like this
-console.log(playerName, playerHealth, playerAttack, playerMoney);
+    console.log(playerName, playerHealth, playerAttack, playerMoney);
  
-var enemyName = "Roborto";
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
 var enemyHealth = 50;
 var enemyAttack = 12;
 
-var fight = function() {
+// Game States
+// "WIN" - Player robot has defeated all enemy-robots
+//      * Fight all enemy-robots
+//      * Defeat each enemy-robot
+// "LOSE" - Player robot's health is zero or less
+
+var fight = function(enemyName) {
     // Alert players that they are starting the round
     window.alert("Welcome to Robot Gladiators!");
 
@@ -18,7 +22,6 @@ var fight = function() {
 
     // if player chooses to fight, then fight
     if (promptFight === "fight" || promptFight === "FIGHT") {
-
         // Subtract the value of 'playerAttack' from the value of 'enemyHealth' and use that result to update the value in the 'enemyHealth' variable.
         enemyHealth = enemyHealth - playerAttack;
         // Log a resulting message to the console so we know that it worked.
@@ -28,8 +31,7 @@ var fight = function() {
         // check enemy health
         if (enemyHealth <= 0) {
             window.alert(enemyName + " has died!");
-        }
-        else {
+        } else {
             window.alert(enemyName + " still has " + enemyHealth + " health left.");
         }
         
@@ -42,8 +44,7 @@ var fight = function() {
         // check player's health
         if (playerHealth <= 0) {
             window.alert(playerName + " has died!");
-        }
-        else {
+        } else {
             window.alert(playerName + " still has " + playerHealth + " health left.");
         }
 
@@ -60,7 +61,7 @@ var fight = function() {
         }
         // if no (false), ask question again by running fight() again
         else {
-            fight()
+            fight();
         }
 
     } else {
@@ -68,4 +69,6 @@ var fight = function() {
     }
 }
 
-fight();
+for(var i= 0; i < enemyNames.length; i++) {
+    fight(enemyNames[i]);
+}
